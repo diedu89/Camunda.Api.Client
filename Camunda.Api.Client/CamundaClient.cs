@@ -48,6 +48,7 @@ namespace Camunda.Api.Client
         internal class HistoricApi
         {
             public Lazy<IHistoricProcessInstanceRestService> ProcessInstanceApi;
+            public Lazy<IHistoricTaskRestService> TaskApi;
             public Lazy<IHistoricActivityInstanceRestService> ActivityInstanceApi;
             public Lazy<IHistoricJobLogRestService> JobLogApi;
             public Lazy<IHistoricIncidentRestService> IncidentApi;
@@ -103,6 +104,7 @@ namespace Camunda.Api.Client
             _historicApi = new HistoricApi()
             {
                 ProcessInstanceApi = CreateService<IHistoricProcessInstanceRestService>(),
+                TaskApi = CreateService<IHistoricTaskRestService>(),
                 ActivityInstanceApi = CreateService<IHistoricActivityInstanceRestService>(),
                 JobLogApi = CreateService<IHistoricJobLogRestService>(),
                 IncidentApi = CreateService<IHistoricIncidentRestService>(),

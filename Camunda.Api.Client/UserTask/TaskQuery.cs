@@ -199,7 +199,6 @@ namespace Camunda.Api.Client.UserTask
         /// Restrict to tasks that belong to a case execution with the given id.
         /// </summary>
         public string CaseExecutionId;
-
         /// <summary>
         /// Restrict to tasks that are due after the given date. The date must have the format yyyy-MM-dd'T'HH:mm:ss, e.g., 2013-01-23T14:42:45.
         /// </summary>
@@ -335,56 +334,35 @@ namespace Camunda.Api.Client.UserTask
         /// Mandatory when <paramref name="sortBy" /> is either 
         /// <see cref="TaskSorting.ProcessVariable"/>, <see cref="TaskSorting.ExecutionVariable"/>, <see cref="TaskSorting.TaskVariable"/>, <see cref="TaskSorting.CaseExecutionVariable"/> or <see cref="TaskSorting.CaseInstanceVariable"/>
         /// </param>
-        public TaskQuery Sort(TaskSorting sortBy, SortOrder sortOrder = SortOrder.Ascending, VariableOrder variable = null)
+        public TaskQuery Sort(TaskSorting sortBy, SortOrder sortOrder = SortOrder.Ascending)
         {
-            Dictionary<string, object> parameters = null;
-
-            TaskSorting[] variableSorting = new[] {
-                TaskSorting.ProcessVariable,
-                TaskSorting.ExecutionVariable,
-                TaskSorting.TaskVariable,
-                TaskSorting.CaseExecutionVariable,
-                TaskSorting.CaseInstanceVariable
-            };
-
-            bool isVariableSorting = variableSorting.Contains(sortBy);
-
-            if (isVariableSorting ^ variable != null) // ak je sortovacia premenna, musi byt uvedeny VariableOrder
-                throw new ArgumentException("Variable is mandatory when sortBy is either processVariable, executionVariable, taskVariable, caseExecutionVariable or caseInstanceVariable.", nameof(variable));
-
-            if (variable != null) {
-                parameters = new Dictionary<string, object>() {
-                    ["variable"] = variable.VariableName,
-                    ["type"] = variable.Type.ToString(),
-                };
-            }
-
-            Sorting.Add(new SortingInfo<TaskSorting>() { SortBy = sortBy, SortOrder = sortOrder, Parameters = parameters });
-
+            Sorting.Add(new SortingInfo<TaskSorting>() { SortBy = sortBy, SortOrder = sortOrder });
             return this;
         }
     }
 
     public enum TaskSorting
     {
-        Id,
-        InstanceId,
-        CaseInstanceId,
-        DueDate,
+        TaskId,
+        ActivityInstanceID,
+        ProcessDefinitionId,
+        ProcessInstanceId,
         ExecutionId,
-        CaseExecutionId,
+        Duration,
+        EndTime,
+        StartTime,
+        TaskName,
+        TaskDescription,
         Assignee,
-        Created,
-        Description,
-        Name,
-        NameCaseInsensitive,
+        Owner,
+        DueDate,
+        FollowUpDate,
+        DeleteReason,
+        TaskDefinitionKey,
         Priority,
-
-        ProcessVariable,
-        ExecutionVariable,
-        TaskVariable,
-        CaseExecutionVariable,
-        CaseInstanceVariable
+        CaseDefinitionId,
+        CaseInstanceId,
+        CaseExecutionId,
+        TenantId
     }
-
 }
