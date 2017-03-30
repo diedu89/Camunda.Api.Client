@@ -111,31 +111,31 @@ namespace Camunda.Api.Client.History
         /// <summary>
         /// Restrict to tasks that have the given priority.
         /// </summary>
-        public long TaskPriority;
+        public long? TaskPriority;
         /// <summary>
         /// If set to true, restricts the query to all tasks that are assigned.
         /// </summary>
-        public bool Assigned;
+        public bool? Assigned;
         /// <summary>
         /// If set to true, restricts the query to all tasks that are unassigned.
         /// </summary>
-        public bool Unassigned;
+        public bool? Unassigned;
         /// <summary>
         /// Only include finished tasks.
         /// </summary>
-        public bool Finished = false;
+        public bool? Finished;
         /// <summary>
         /// Only include unfinished tasks.
         /// </summary>
-        public bool Unfinished = false;
+        public bool? Unfinished;
         /// <summary>
         /// Only include tasks of finished processes.
         /// </summary>
-        public bool ProcessFinished = false;
+        public bool? ProcessFinished;
         /// <summary>
         /// Only include tasks of unfinished processes. 
         /// </summary>
-        public bool ProcessUnfinished = false;
+        public bool? ProcessUnfinished;
         /// <summary>
         /// Restrict to tasks that are due on the given date. The date must have the format yyyy-MM-dd'T'HH:mm:ss, e.g., 2013-01-23T14:42:45.
         /// </summary>
