@@ -113,6 +113,13 @@ namespace Camunda.Api.Client.History
         /// Restrict query to all process instances that are sub process instances of the given case instance. Takes a case instance id.
         /// </summary>
         public string CaseInstanceId;
+        /// <summary>
+        /// An array to only include process instances that have variables with certain values. 
+        /// The array consists of objects with the three properties name, operator and value.
+        /// Name(String) is the variable name, operator is the comparison operator to be used and value the variable value. 
+        /// Value may be String, Number or Boolean.
+        /// </summary>
+        public List<VariableQueryParameter> Variables = new List<VariableQueryParameter>();
     }
 
     public enum HistoricProcessInstanceQuerySorting
